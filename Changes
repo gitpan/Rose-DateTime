@@ -21,3 +21,9 @@
     * Ho hum, another day, another release.  Documentation patch 
       again to fix more typos and further clarify local time zone
       shenanigans.  Version 0.121 removed.
+
+0.013 (02.26.2005) - John Siracusa <siracusa@mindspring.com>
+
+    * Changed default time zone from 'local' to 'floating' in
+      Rose::DateTime::Util in order to avoid unnecessary overhead
+      when setting the time zone explicitly.  Version 0.1222 removed.

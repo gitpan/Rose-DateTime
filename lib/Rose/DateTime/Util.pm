@@ -18,9 +18,9 @@ our %EXPORT_TAGS =
   all => \@EXPORT_OK
 );
 
-our $VERSION = '0.0122';
+our $VERSION = '0.013';
 
-our $TZ    = 'local';
+our $TZ    = 'floating';
 our $Debug = 0;
 our $Error;
 
@@ -572,7 +572,7 @@ Since the time zone is not part of any of the supported date string formats,
 C<parse_date()> takes an optional TIMEZONE argument which is passed to the
 C<DateTime> constructor as the value of the C<time_zone> parameter.  In the
 absence of a TIMEZONE argument to C<parwse_date()>, the time zone defaults to
-the value returned by C<Rose::DateTime::Util>'s C<time_zone()> class method ("local", by
+the value returned by C<Rose::DateTime::Util>'s C<time_zone()> class method ("floating", by
 default)
 
 The formats understood and their interpretations are listed below.  Square
@@ -625,18 +625,20 @@ Returns a message describing the last error that occurred.
 Get or set the default time zone.  This value is passed to
 C<DateTime->new(...)> as the value of the C<time_zone> parameter when
 C<parse_date()> creates the C<DateTime> object that it returns.  The default
-value is "local".
+value is "floating".
 
+=begin comment
 B<PLEASE NOTE:> The local time zone may not be known on all systems (in
 particular, Win32 systems).  If you are on such a system, you will encounter a
-fatal error when C<parse_date()> tries to construct a C<DateTime> object with
-a time zone of "local"...which is the default, remember.
+fatal error if C<parse_date()> tries to construct a C<DateTime> object with
+a time zone of "local".
 
 See the L<DateTime::TimeZone> documentation for information on the various
 ways to successfully indicate your local time zone, or set a different default
 time zone for this class by calling
 C<Rose::DateTime::Util-E<gt>time_zone(...)> with a new time zone as an
 argument.
+=end comment
 
 =back
 
