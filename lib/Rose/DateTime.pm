@@ -2,7 +2,7 @@ package Rose::DateTime;
 
 use strict; # ha
 
-our $VERSION = '0.011';
+our $VERSION = '0.012';
 
 1;
 

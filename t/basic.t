@@ -12,6 +12,12 @@ BEGIN
 
 use Rose::DateTime::Util qw(:all); # test import
 
+# Test to see if we can creat local DateTimes
+eval { DateTime->now(time_zone => 'local') };
+
+# Use UTC if we can't
+Rose::DateTime::Util->time_zone('UTC')  if($@);
+
 #
 # parse_date()
 #
@@ -34,13 +40,6 @@ my $dt4 = DateTime->new(month => 2, day => 3, year => 2004,
                         hour  => 13, minute => 34, second => 56,
                         nanosecond => '123400000',
                         time_zone => Rose::DateTime::Util->time_zone);
-
-
-# Test to see if we can creat local DateTimes
-eval { DateTime->now(time_zone => 'local') };
-
-# Use UTC if we can't
-Rose::DateTime::Util->time_zone('UTC')  if($@);
 
 # mm/dd/yyyy [hh:mm[:ss[.nnnnnnnnn]]] [am/pm]
 foreach my $month (qw(2 02))
