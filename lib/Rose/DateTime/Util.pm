@@ -18,7 +18,7 @@ our %EXPORT_TAGS =
   all => \@EXPORT_OK
 );
 
-our $VERSION = '0.0111';
+our $VERSION = '0.0122';
 
 our $TZ    = 'local';
 our $Debug = 0;
@@ -616,23 +616,27 @@ Interpreted as seconds since the Unix epoch.
 
 =over 4
 
-=item error
+=item B<error>
 
 Returns a message describing the last error that occurred.
 
-=item time_zone [TZ]
+=item B<time_zone [TZ]>
 
 Get or set the default time zone.  This value is passed to
 C<DateTime->new(...)> as the value of the C<time_zone> parameter when
 C<parse_date()> creates the C<DateTime> object that it returns.  The default
 value is "local".
 
-B<PLEASE NOTE:> the local time zone may not be known on all systems (in
-particular, Win32 systems).  If you are on such a system, see the
-L<DateTime::TimeZone> documentation for information on the various ways to
-successfully indicate your local time zone, or set a different default time
-zone for this class by calling C<Rose::DateTime::Util->time_zone(...)> with a
-new time zone as an argument.
+B<PLEASE NOTE:> The local time zone may not be known on all systems (in
+particular, Win32 systems).  If you are on such a system, you will encounter a
+fatal error when C<parse_date()> tries to construct a C<DateTime> object with
+a time zone of "local"...which is the default, remember.
+
+See the L<DateTime::TimeZone> documentation for information on the various
+ways to successfully indicate your local time zone, or set a different default
+time zone for this class by calling
+C<Rose::DateTime::Util-E<gt>time_zone(...)> with a new time zone as an
+argument.
 
 =back
 

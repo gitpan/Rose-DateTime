@@ -15,3 +15,9 @@
 
     * Documentation patch to fix typos and clarify local time zone
       shenanigans.  Version 0.12 removed.
+
+0.0122 (12.14.2004) - John Siracusa <siracusa@mindspring.com>
+
+    * Ho hum, another day, another release.  Documentation patch 
+      again to fix more typos and further clarify local time zone
+      shenanigans.  Version 0.121 removed.
