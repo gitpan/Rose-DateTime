@@ -18,7 +18,7 @@ our %EXPORT_TAGS =
   all => \@EXPORT_OK
 );
 
-our $VERSION = '0.011';
+our $VERSION = '0.0111';
 
 our $TZ    = 'local';
 our $Debug = 0;
@@ -272,9 +272,10 @@ Rose::DateTime::Util - Some simple DateTime wrapper functions.
 
     use Rose::DateTime::Util qw(:all);
 
-    $now = parse_date('now;);
+    $now  = parse_date('now');
+    $then = parse_date('12/25/2001 6pm');
 
-    $date_text = format_date($now, "%D at %T %p");
+    $date_text = format_date($then, "%D at %T %p");
 
     ...
 
@@ -624,7 +625,14 @@ Returns a message describing the last error that occurred.
 Get or set the default time zone.  This value is passed to
 C<DateTime->new(...)> as the value of the C<time_zone> parameter when
 C<parse_date()> creates the C<DateTime> object that it returns.  The default
-value is "local"
+value is "local".
+
+B<PLEASE NOTE:> the local time zone may not be known on all systems (in
+particular, Win32 systems).  If you are on such a system, see the
+L<DateTime::TimeZone> documentation for information on the various ways to
+successfully indicate your local time zone, or set a different default time
+zone for this class by calling C<Rose::DateTime::Util->time_zone(...)> with a
+new time zone as an argument.
 
 =back
 

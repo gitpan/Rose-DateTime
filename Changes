@@ -11,3 +11,7 @@
     * Fix attempt to fail gracefully when the local time zone cannot
       be determined.  Version 0.011 removed.
 
+0.0121 (12.13.2004) - John Siracusa <siracusa@mindspring.com>
+
+    * Documentation patch to fix typos and clarify local time zone
+      shenanigans.  Version 0.12 removed.

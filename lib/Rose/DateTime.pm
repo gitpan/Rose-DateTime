@@ -2,7 +2,7 @@ package Rose::DateTime;
 
 use strict; # ha
 
-our $VERSION = '0.012';
+our $VERSION = '0.0121';
 
 1;
 
@@ -16,9 +16,10 @@ Rose::DateTime - DateTime helper functions and objects.
 
     use Rose::DateTime::Util qw(:all);
 
-    $now = parse_date('now;);
+    $now  = parse_date('now');
+    $then = parse_date('12/25/2001 6pm');
 
-    $date_text = format_date($now, "%D at %T %p");
+    $date_text = format_date($then, "%D at %T %p");
 
     ...
 
@@ -26,17 +27,17 @@ Rose::DateTime - DateTime helper functions and objects.
 
     $parser = Rose::DateTime::Parser->new(time_zone => 'UTC');
 
-    $date = $parser->parse_date('/12/25/1999');
+    $date = $parser->parse_date('12/25/1999');
 
 =head1 DESCRIPTION
 
-The C<Rose::DateTime::*> provide a few convenience functions and objects for
-use with C<DateTime> dates.
+The C<Rose::DateTime::*> modules provide a few convenience functions and
+objects for use with C<DateTime> dates.
 
-C<Rose::DateTime::Util> contains a simple date parser and a slightly
+L<Rose::DateTime::Util> contains a simple date parser and a slightly
 customized date formatter.
 
-C<Rose::DateTime::Parser> encapsulates a date parser with an associated
+L<Rose::DateTime::Parser> encapsulates a date parser with an associated
 default time zone.
 
 This module (C<Rose::DateTime>) exists mostly to provide a version number for
