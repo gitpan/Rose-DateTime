@@ -18,7 +18,7 @@ our %EXPORT_TAGS =
   all => \@EXPORT_OK
 );
 
-our $VERSION = '0.013';
+our $VERSION = '0.0131';
 
 our $TZ    = 'floating';
 our $Debug = 0;
@@ -261,6 +261,21 @@ sub _timelocal
 }
 
 1;
+
+# Can't figure out how to hide comments like this from search.cpan.org's
+# POD-to-HTML translator...
+# =begin comment
+# B<PLEASE NOTE:> The local time zone may not be known on all systems (in
+# particular, Win32 systems).  If you are on such a system, you will encounter a
+# fatal error if C<parse_date()> tries to construct a C<DateTime> object with
+# a time zone of "local".
+# 
+# See the L<DateTime::TimeZone> documentation for information on the various
+# ways to successfully indicate your local time zone, or set a different default
+# time zone for this class by calling
+# C<Rose::DateTime::Util-E<gt>time_zone(...)> with a new time zone as an
+# argument.
+# =end comment
 
 __END__
 
@@ -623,22 +638,9 @@ Returns a message describing the last error that occurred.
 =item B<time_zone [TZ]>
 
 Get or set the default time zone.  This value is passed to
-C<DateTime->new(...)> as the value of the C<time_zone> parameter when
+C<DateTime-E<gt>new(...)> as the value of the C<time_zone> parameter when
 C<parse_date()> creates the C<DateTime> object that it returns.  The default
 value is "floating".
-
-=begin comment
-B<PLEASE NOTE:> The local time zone may not be known on all systems (in
-particular, Win32 systems).  If you are on such a system, you will encounter a
-fatal error if C<parse_date()> tries to construct a C<DateTime> object with
-a time zone of "local".
-
-See the L<DateTime::TimeZone> documentation for information on the various
-ways to successfully indicate your local time zone, or set a different default
-time zone for this class by calling
-C<Rose::DateTime::Util-E<gt>time_zone(...)> with a new time zone as an
-argument.
-=end comment
 
 =back
 

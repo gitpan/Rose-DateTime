@@ -27,3 +27,7 @@
     * Changed default time zone from 'local' to 'floating' in
       Rose::DateTime::Util in order to avoid unnecessary overhead
       when setting the time zone explicitly.  Version 0.1222 removed.
+
+0.0131 (03.10.2005) - John Siracusa <siracusa@mindspring.com>
+
+    * Fixed POD errors in Rose::DateTime::Util.  Version 0.13 removed.
