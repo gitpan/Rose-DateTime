@@ -18,7 +18,7 @@ our %EXPORT_TAGS =
   all => \@EXPORT_OK
 );
 
-our $VERSION = '0.01';
+our $VERSION = '0.011';
 
 our $TZ    = 'local';
 our $Debug = 0;
@@ -631,3 +631,9 @@ value is "local"
 =head1 AUTHOR
 
 John C. Siracusa (siracusa@mindspring.com)
+
+=head1 COPYRIGHT
+
+Copyright (c) 2004 by John C. Siracusa.  All rights reserved.  This program is
+free software; you can redistribute it and/or modify it under the same terms
+as Perl itself.

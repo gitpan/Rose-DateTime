@@ -13,6 +13,8 @@ use Rose::Object::MakeMethods::Generic
   'scalar --get_set_init' => 'time_zone',
 );
 
+our $VERSION = '0.011';
+
 sub init_time_zone { Rose::DateTime::Util->time_zone }
 
 sub parse_date
@@ -94,3 +96,9 @@ Defaults to C<Rose::DateTime::Util-E<gt>time_zone>.
 =head1 AUTHOR
 
 John C. Siracusa (siracusa@mindspring.com)
+
+=head1 COPYRIGHT
+
+Copyright (c) 2004 by John C. Siracusa.  All rights reserved.  This program is
+free software; you can redistribute it and/or modify it under the same terms
+as Perl itself.
