@@ -13,7 +13,7 @@ use Rose::Object::MakeMethods::Generic
   'scalar --get_set_init' => 'time_zone',
 );
 
-our $VERSION = '0.011';
+our $VERSION = '0.012';
 
 sub init_time_zone { Rose::DateTime::Util->time_zone }
 
@@ -29,7 +29,6 @@ sub parse_date
 *parse_datetime = \&parse_date;
 
 1;
-
 
 __END__
 
@@ -49,12 +48,13 @@ Rose::DateTime::Parser - DateTime parser object.
 
 =head1 DESCRIPTION
 
-C<Rose::DateTime::Parser> encapsulates a particular kind of call to
-C<Rose::DateTime::Util::parse_date()>.  The object maintains the desired time
-zone, which is then passed to each call to C<parse_date()>.
+L<Rose::DateTime::Parser> encapsulates a particular kind of call to
+L<Rose::DateTime::Util::parse_date|Rose::DateTime::Util/parse_date>.  The
+object maintains the desired time zone, which is then passed to each call to
+L<parse_date>.
 
-This class inherits from, and follows the conventions of, C<Rose::Object>.
-See the C<Rose::Object> documentation for more information.
+This class inherits from, and follows the conventions of, L<Rose::Object>.
+See the L<Rose::Object> documentation for more information.
 
 =head1 CONSTRUCTOR
 
@@ -62,7 +62,7 @@ See the C<Rose::Object> documentation for more information.
 
 =item B<new PARAMS>
 
-Constructs a new C<Rose::DateTime::Parser> object based on PARAMS, where 
+Constructs a new L<Rose::DateTime::Parser> object based on PARAMS, where 
 PARAMS are name/value pairs.  Any object method is a valid parameter name.
 
 =back
@@ -78,18 +78,18 @@ Get or set the error message string.
 =item B<parse_date STRING>
 
 Attempt to parse STRING by passing it to
-C<Rose::DateTime::Util::parse_date()>. If parsing is successful, the
-resulting C<DateTime> object is returned. Otherwise, C<error()> is set and
-false is returned.
+L<Rose::DateTime::Util::parse_date|Rose::DateTime::Util/parse_date>. If
+parsing is successful, the resulting L<DateTime> object is returned.
+Otherwise, L<error> is set and false is returned.
 
 =item B<parse_datetime STRING>
 
-Alias for C<parse_date()>
+Alias for L<parse_date>
 
 =item B<time_zone [STRING]>
 
-Get or set the time zone string passed to C<Rose::DateTime::Util::parse_date()>.
-Defaults to C<Rose::DateTime::Util-E<gt>time_zone>.
+Get or set the time zone string passed to L<Rose::DateTime::Util::parse_date|Rose::DateTime::Util/parse_date>.
+Defaults to L<Rose::DateTime::Util-E<gt>time_zone|Rose::DateTime::Util/time_zone>.
 
 =back
 
