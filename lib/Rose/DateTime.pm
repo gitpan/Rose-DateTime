@@ -2,7 +2,7 @@ package Rose::DateTime;
 
 use strict; # ha
 
-our $VERSION = '0.0132';
+our $VERSION = '0.0133';
 
 1;
 
@@ -31,17 +31,13 @@ Rose::DateTime - DateTime helper functions and objects.
 
 =head1 DESCRIPTION
 
-The C<Rose::DateTime::*> modules provide a few convenience functions and
-objects for use with C<DateTime> dates.
+The C<Rose::DateTime::*> modules provide a few convenience functions and objects for use with C<DateTime> dates.
 
-L<Rose::DateTime::Util> contains a simple date parser and a slightly
-customized date formatter.
+L<Rose::DateTime::Util> contains a simple date parser and a slightly customized date formatter.
 
-L<Rose::DateTime::Parser> encapsulates a date parser with an associated
-default time zone.
+L<Rose::DateTime::Parser> encapsulates a date parser with an associated default time zone.
 
-This module (C<Rose::DateTime>) exists mostly to provide a version number for
-CPAN.  See the individual modules for some actual documentation.
+This module (C<Rose::DateTime>) exists mostly to provide a version number for CPAN.  See the individual modules for some actual documentation.
 
 =head1 AUTHOR
 
@@ -49,6 +45,4 @@ John C. Siracusa (siracusa@mindspring.com)
 
 =head1 COPYRIGHT
 
-Copyright (c) 2004 by John C. Siracusa.  All rights reserved.  This program is
-free software; you can redistribute it and/or modify it under the same terms
-as Perl itself.
+Copyright (c) 2004 by John C. Siracusa.  All rights reserved.  This program is free software; you can redistribute it and/or modify it under the same terms as Perl itself.

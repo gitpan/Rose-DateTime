@@ -48,13 +48,9 @@ Rose::DateTime::Parser - DateTime parser object.
 
 =head1 DESCRIPTION
 
-L<Rose::DateTime::Parser> encapsulates a particular kind of call to
-L<Rose::DateTime::Util::parse_date|Rose::DateTime::Util/parse_date>.  The
-object maintains the desired time zone, which is then passed to each call to
-L<parse_date>.
+C<Rose::DateTime::Parser> encapsulates a particular kind of call to L<Rose::DateTime::Util>'s L<parse_date|Rose::DateTime::Util/parse_date> function.  The object maintains the desired time zone, which is then passed to each call to C<parse_date()>.
 
-This class inherits from, and follows the conventions of, L<Rose::Object>.
-See the L<Rose::Object> documentation for more information.
+This class inherits from, and follows the conventions of, L<Rose::Object>. See the L<Rose::Object> documentation for more information.
 
 =head1 CONSTRUCTOR
 
@@ -62,8 +58,7 @@ See the L<Rose::Object> documentation for more information.
 
 =item B<new PARAMS>
 
-Constructs a new L<Rose::DateTime::Parser> object based on PARAMS, where 
-PARAMS are name/value pairs.  Any object method is a valid parameter name.
+Constructs a new C<Rose::DateTime::Parser> object based on PARAMS, where PARAMS are name/value pairs.  Any object method is a valid parameter name.
 
 =back
 
@@ -77,19 +72,15 @@ Get or set the error message string.
 
 =item B<parse_date STRING>
 
-Attempt to parse STRING by passing it to
-L<Rose::DateTime::Util::parse_date|Rose::DateTime::Util/parse_date>. If
-parsing is successful, the resulting L<DateTime> object is returned.
-Otherwise, L<error> is set and false is returned.
+Attempt to parse STRING by passing it to L<Rose::DateTime::Util>'s L<parse_date|Rose::DateTime::Util/parse_date> function. If parsing is successful, the resulting C<DateTime> object is returned. Otherwise, C<error()> is set and false is returned.
 
 =item B<parse_datetime STRING>
 
-Alias for L<parse_date>
+Alias for C<parse_date()>
 
 =item B<time_zone [STRING]>
 
-Get or set the time zone string passed to L<Rose::DateTime::Util::parse_date|Rose::DateTime::Util/parse_date>.
-Defaults to L<Rose::DateTime::Util-E<gt>time_zone|Rose::DateTime::Util/time_zone>.
+Get or set the time zone string passed to L<Rose::DateTime::Util>'s L<parse_date|Rose::DateTime::Util/parse_date> function. Defaults to C<Rose::DateTime::Util-E<gt>time_zone>.
 
 =back
 
@@ -99,6 +90,4 @@ John C. Siracusa (siracusa@mindspring.com)
 
 =head1 COPYRIGHT
 
-Copyright (c) 2004 by John C. Siracusa.  All rights reserved.  This program is
-free software; you can redistribute it and/or modify it under the same terms
-as Perl itself.
+Copyright (c) 2005 by John C. Siracusa.  All rights reserved.  This program is free software; you can redistribute it and/or modify it under the same terms as Perl itself.
