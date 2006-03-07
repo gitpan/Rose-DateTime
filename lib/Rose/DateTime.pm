@@ -2,7 +2,7 @@ package Rose::DateTime;
 
 use strict; # ha
 
-our $VERSION = '0.0134';
+our $VERSION = '0.50';
 
 1;
 
@@ -39,10 +39,14 @@ L<Rose::DateTime::Parser> encapsulates a date parser with an associated default 
 
 This module (C<Rose::DateTime>) exists mostly to provide a version number for CPAN.  See the individual modules for some actual documentation.
 
+=head1 SEE ALSO
+
+L<DateTime>, L<DateTime::TimeZone>
+
 =head1 AUTHOR
 
 John C. Siracusa (siracusa@mindspring.com)
 
 =head1 COPYRIGHT
 
-Copyright (c) 2004 by John C. Siracusa.  All rights reserved.  This program is free software; you can redistribute it and/or modify it under the same terms as Perl itself.
+Copyright (c) 2004-2006 by John C. Siracusa.  All rights reserved.  This program is free software; you can redistribute it and/or modify it under the same terms as Perl itself.
