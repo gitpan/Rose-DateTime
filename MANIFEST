@@ -5,6 +5,7 @@ lib/Rose/DateTime/Util.pm
 Makefile.PL
 MANIFEST
 t/basic.t
+t/locale.t
 t/parser.t
 t/pod.t
 META.yml                                 Module meta-data (added by MakeMaker)
