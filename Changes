@@ -1,3 +1,10 @@
+0.52 (04.04.2006) - John Siracusa <siracusa@mindspring.com>
+
+    * Allow negative and fractional epoch values in parse_date().
+    * Fixed a bug in the yyyy-mm-dd date parsing that caused it to
+      incorrectly match 10-digit seconds-since-epoch values.
+      (Reported by Peter Karman)
+
 0.51 (03.16.2006) - John Siracusa <siracusa@mindspring.com>
 
     * The european_dates() setting is now initialized as appropriate for

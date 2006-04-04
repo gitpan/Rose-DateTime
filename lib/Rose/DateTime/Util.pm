@@ -18,7 +18,7 @@ our %EXPORT_TAGS =
   all => \@EXPORT_OK
 );
 
-our $VERSION = '0.50';
+our $VERSION = '0.52';
 
 our $TZ = 'floating';
 our $Debug = 0;
@@ -78,7 +78,7 @@ sub parse_date
   $time_zone ||= $TZ;
 
   my($fsecs, $secs, $mins, $hours, $mday, $month, $year, $wday, $yday, $isdst,
-     $month_abbrev, $date, $ampm);
+     $month_abbrev, $date, $ampm, $hours2, $ampm2);
 
   $Error = undef;
 
@@ -97,15 +97,46 @@ sub parse_date
 
     return $arg;
   }
-  elsif(($year, $month, $mday, $hours, $mins, $secs, $fsecs, $ampm) =
-       ($arg =~ /^(\d{4})\s*-?\s*(\d{2})\s*-?\s*(\d{2})(?:\s*-?\s*(\d\d?)(?::(\d\d)(?::(\d\d))?)?(?:\.(\d{0,9}))?(?:\s*([aApP]\.?[mM]\.?))?)?$/))
+  elsif(($year, $month, $mday, $hours, $mins, $secs, $fsecs, $ampm, $hours2, $ampm2) = ($arg =~ 
+  m{
+    ^
+    (\d{4}) \s* [-._]? \s* # year
+    (\d{2}) \s* [-._]? \s* # month
+    (\d{2})            # day
+    (?:
+      \s* [-._T]? \s*
+      (?:
+        (\d\d?) :        # hour
+        (\d\d)           # min
+        (?: (?: : (\d\d) )? (?: \. (\d{0,9}) )? )? # sec? nanosec?
+        (?: \s* ([aApP]\.?[mM]\.?) )? # am/pm?
+        |
+        (\d\d?) # hour 
+        (?: \s* ([aApP]\.?[mM]\.?) ) # am/pm
+      )
+    )?
+    $
+  }x))
   {
     # yyyy mm dd [hh:mm[:ss[.nnnnnnnnn]]] [am/pm] also valid w/o spaces or w/ hyphens
 
+    $hours = $hours2  if(defined $hours2);
+    $ampm  = $ampm2   if(defined $ampm2);
+
     $date = _timelocal($secs, $mins, $hours, $mday, $month, $year, $ampm, $fsecs, $time_zone);
   }
-  elsif(($month, $mday, $year, $hours, $mins, $secs, $fsecs, $ampm) = 
-        ($arg =~ m#^(\d{1,2})[-/.](\d{1,2})[-/.](\d{4})(?:\s+(\d\d?)(?::(\d\d)(?::(\d\d))?)?(?:\.(\d{0,9}))?(?:\s*([aApP]\.?[mM]\.?))?)?$#))
+  elsif(($month, $mday, $year, $hours, $mins, $secs, $fsecs, $ampm) = ($arg =~ 
+  m{
+    ^
+    (\d{1,2}) [-/._] (\d{1,2}) [-/._] (\d{4}) # xx-xx-yyyy
+    (?:
+      (?: \s+ | [-._T] )
+      (\d\d?) # hour
+      (?::(\d\d)(?::(\d\d))?)?(?:\.(\d{0,9}))? # min? sec? nanosec?
+      (?:\s*([aApP]\.?[mM]\.?))? # am/pm
+    )?
+    $
+  }x))
   {
     # Normal:   mm/dd/yyyy, mm-dd-yyyy, mm.dd.yyyy [hh:mm[:ss][.nnnnnnnnn]] [am/pm]
     # European: dd/mm/yyyy, dd-mm-yyyy, dd.mm.yyyy [hh:mm[:ss][.nnnnnnnnn]] [am/pm]
@@ -117,12 +148,12 @@ sub parse_date
 
     $date = _timelocal($secs, $mins, $hours, $mday, $month, $year, $ampm, $fsecs, $time_zone);
   }
-  elsif($arg =~ /^now$/i)
+  elsif(lc $arg eq 'now')
   {
     # Right now
     return DateTime->now(time_zone => $time_zone);
   }
-  elsif($arg =~ /^(\d{9,10})(?:\.(\d{0,9}))?$/)
+  elsif($arg =~ /^(-?\d{9,10})(?:\.(\d{0,9}))?$/)
   {
     # In Unix time format (guessing)
     $date = DateTime->from_epoch(epoch => $1, time_zone => $time_zone);
@@ -644,19 +675,27 @@ Right now.
 
 Today, at 00:00:00.
 
-=item yyyy mm dd [hh:mm[:ss[.nnnnnnnnn]]] [am/pm]
+=item yyyy mm dd
 
-Exact date and time.  Also valid without spaces and with hyphens between the year, month, day, and time.  The time is optional and defaults to 00:00:00. Fractional seconds take a maximum of 9 digits, but fewer are also acceptable.
+=item yyyy mm dd [hh? am/pm]
 
-=item mm/dd/yyyy [hh:mm[:ss[.nnnnnnnnn]]] [am/pm]
+=item yyyy mm dd [hh?:mm [am/pm]]
 
-Exact date and time.  Also valid with hyphens ("-") or dots (".") instead of slashes ("/").  The time is optional and defaults to 00:00:00.  Fractional seconds take a maximum of 9 digits, but fewer are also acceptable.
+=item yyyy mm dd [hh?:mm:ss [am/pm]]
+
+=item yyyy mm dd [hh?:mm:ss.nnnnnnnnn [am/pm]]
+
+Exact date and time.  Also valid without spaces, with hyphens ("-"), periods ("."), or underscores ("_") between the year, month, and day, and with a "T", hyphen, period, or underscore between the date and time.  The time is optional and defaults to 00:00:00.  The am/pm part is optional unless only the "hh" (hours) part of the time is specified.  Fractional seconds take a maximum of 9 digits, but fewer are also acceptable.
+
+=item mm/dd/yyyy [hh[:mm[:ss[.nnnnnnnnn]]]] [am/pm]
+
+Exact date and time.  Also valid with hyphens ("-"), periods ("."), or underscores ("_") instead of slashes ("/"), and with a "T", hyphen, period, or underscore between the date and time.  The time is optional and defaults to 00:00:00.  The am/pm part is optional.  Fractional seconds take a maximum of 9 digits, but fewer are also acceptable.
 
 This format is only valid when L<european_dates|/european_dates> is set to B<false> (which is the default).
 
-=item dd/mm/yyyy [hh:mm[:ss[.nnnnnnnnn]]] [am/pm]
+=item dd/mm/yyyy [hh[:mm[:ss[.nnnnnnnnn]]]] [am/pm]
 
-Exact date and time.  Also valid with hyphens ("-") or dots (".") instead of slashes ("/").  The time is optional and defaults to 00:00:00.  Fractional seconds take a maximum of 9 digits, but fewer are also acceptable.
+Exact date and time.  Also valid with hyphens ("-"), periods ("."), or underscores ("_") instead of slashes ("/").  The time is optional and defaults to 00:00:00.  The am/pm part is optional.  Fractional seconds take a maximum of 9 digits, but fewer are also acceptable.
 
 This format is only valid when L<european_dates|/european_dates> is set to B<true>.
 
@@ -664,9 +703,9 @@ This format is only valid when L<european_dates|/european_dates> is set to B<tru
 
 Positive or negative infinity.  Case insensitive.
 
-=item (string of 9 or more digits)
+=item [-]dddddddddd[.nnnnnnnnn] seconds)
 
-Interpreted as seconds since the Unix epoch.
+A 9 or 10-digit positive or negative number with optional fractional seconds is interpreted as seconds since the Unix epoch.  Fractional seconds take a maximum of 9 digits, but fewer are also acceptable.
 
 =back
 
