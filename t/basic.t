@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 5522;
+use Test::More tests => 5527;
 
 BEGIN 
 {
@@ -363,6 +363,21 @@ ok($d2 && $d2->isa('DateTime') && $d2 eq $d, 'parse_date(DateTime)');
 
 $d2 = parse_date($d, 'floating');
 ok($d2 && $d2->isa('DateTime') && $d2->time_zone->name eq 'floating', 'parse_date(DateTime, TZ) 2');
+
+$d2 = parse_date('.');
+ok(!defined $d2, 'parse_date(.)');
+
+$d2 = parse_date('.123');
+is($d2->strftime('%Y-%m-%d %H:%M:%S.%N'), '1970-01-01 00:00:00.123000000', 'parse_date(.123)');
+
+$d2 = parse_date('1.123');
+is($d2->strftime('%Y-%m-%d %H:%M:%S.%N'), '1970-01-01 00:00:01.123000000', 'parse_date(1.123)');
+
+$d2 = parse_date('19991201');
+is($d2->strftime('%Y-%m-%d'), '1999-12-01', 'parse_date(19991201)');
+
+$d2 = parse_epoch('19991201');
+is($d2->strftime('%Y-%m-%d'), '1970-08-20', 'parse_date(parse_epoch)');
 
 $d2 = parse_date($d, 'nonesuchasdf');
 ok(!defined $d2, 'parse_date(DateTime, invalid TZ)');
