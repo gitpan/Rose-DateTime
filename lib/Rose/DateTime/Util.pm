@@ -18,7 +18,7 @@ our %EXPORT_TAGS =
   all => \@EXPORT_OK
 );
 
-our $VERSION = '0.53';
+our $VERSION = '0.531';
 
 our $TZ = 'floating';
 our $Debug = 0;
@@ -150,7 +150,7 @@ sub parse_date
 
     $date = _timelocal($secs, $mins, $hours, $mday, $month, $year, $ampm, $fsecs, $time_zone);
   }
-  elsif(lc $arg eq 'now')
+  elsif(lc $arg eq 'now' || lc $arg eq 'now!')
   {
     # Right now
     return DateTime->now(time_zone => $time_zone);
@@ -667,7 +667,7 @@ A literal `%' character.
 
 =item * %{method}
 
-Any method name may be specified using the format C<%{method}> name where "method" is a valid C<DateTime.pm> object method.
+Any method name may be specified using the format C<%{method}> name where "method" is a valid L<DateTime> object method.
 
 =back
 
@@ -719,7 +719,7 @@ is equivalent to this:
 
 =item B<parse_date TEXT [, TIMEZONE]>
 
-Attempts to parse the date described by TEXT.  Returns a L<DateTime> object, or undef on failure, with an error message available via C<Rose::DateTime::Util-E<gt>error()|/error>.
+Attempts to parse the date described by TEXT.  Returns a L<DateTime> object, or undef on failure, with an error message available via L<Rose::DateTime::Util-E<gt>error()|/error>.
 
 If a L<DateTime> object is passed in place of the TEXT argument, it is returned as-is if there is no TIMEZONE argument, or after having L<set_time_zone(TIMEZONE)|DateTime/set_time_zone> called on it if there is a TIMEZONE argument.
 
@@ -731,7 +731,7 @@ The formats understood and their interpretations are listed below.  Square brack
 
 =item now
 
-Right now.
+Right now.  Also valid with an exclamation point: "now!"
 
 =item today
 
