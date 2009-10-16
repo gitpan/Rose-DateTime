@@ -1,13 +1,22 @@
 --- #YAML:1.0
-name:                Rose-DateTime
-version:             0.532
-abstract:            ~
-license:             ~
-generated_by:        ExtUtils::MakeMaker version 6.31
-distribution_type:   module
-requires:     
-    DateTime:                      0
-    Rose::Object:                  0.82
+name:               Rose-DateTime
+version:            0.533
+abstract:           ~
+author:  []
+license:            unknown
+distribution_type:  module
+configure_requires:
+    ExtUtils::MakeMaker:  0
+build_requires:
+    ExtUtils::MakeMaker:  0
+requires:
+    DateTime:      0
+    Rose::Object:  0.82
+no_index:
+    directory:
+        - t
+        - inc
+generated_by:       ExtUtils::MakeMaker version 6.54
 meta-spec:
-    url:     http://module-build.sourceforge.net/META-spec-v1.2.html
-    version: 1.2
+    url:      http://module-build.sourceforge.net/META-spec-v1.4.html
+    version:  1.4
