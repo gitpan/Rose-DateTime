@@ -18,7 +18,7 @@ our %EXPORT_TAGS =
   all => \@EXPORT_OK
 );
 
-our $VERSION = '0.533';
+our $VERSION = '0.534';
 
 our $TZ = 'floating';
 our $Debug = 0;
@@ -57,7 +57,14 @@ sub init_european_dates
 
   my $locale_class = DateTime::Locale->load(DateTime->DefaultLocale);
 
-  if($locale_class->date_parts_order eq 'dmy')
+  my $short = $locale_class->date_format_short;
+  
+  $short =~ tr{dmyDMY}{}cd;
+  $short =~ tr{dmyDMY}{dmydmy}s;
+
+  # date_parts_order() is deprecated in DateTime::Locale 0.44+
+  #if($locale_class->date_parts_order eq 'dmy')
+  if($short eq 'dmy')
   {
     return 1;
   }
@@ -808,4 +815,4 @@ John C. Siracusa (siracusa@gmail.com)
 
 =head1 LICENSE
 
-Copyright (c) 2004-2006 by John C. Siracusa.  All rights reserved.  This program is free software; you can redistribute it and/or modify it under the same terms as Perl itself.
+Copyright (c) 2010 by John C. Siracusa.  All rights reserved.  This program is free software; you can redistribute it and/or modify it under the same terms as Perl itself.
