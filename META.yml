@@ -20,4 +20,4 @@ no_index:
 requires:
   DateTime: 0
   Rose::Object: 0.82
-version: 0.538
+version: 0.539
